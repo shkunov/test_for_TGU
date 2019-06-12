@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+Раздел поиска города и его географических координат в гео-сервисе:
+- ввод название первого города в текстовое поле
+- поиск города по введенному названию в гео-сервисах (например, Геокодер Яндекс.Карт
+https://tech.yandex.ru/maps/geocoder/?from=mapsapi), который возвращает и выводит на web-страницу географические координаты города.
+- запись в базу данных названия города и его координат (запись по кнопке на web-странице, в заранее созданную в БД таблицу). Также должно записываться текущее время записи в отдельное поле в таблице БД.
+
+Раздел вычисления прямого расстояния между двумя городами:
+- выбор из списка имеющихся в БД двух городов, с выводом названий и их координат
+- кнопка расчёта прямого расстояния между ними, с выводом результата на экран
+-->
+<html>
+    <head>
+        <title>Тест ТГУ</title>
+        <meta charset="UTF-8"/>
+
+        <!-- стили -->
+    <link href="css/forform.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://api-maps.yandex.ru/2.1/?load=Geolink&lang=ru_RU&apikey=87b9ee5a-ceec-48f6-902e-7c1655e5e1f6" type="text/javascript"></script>-->
+    <!-- механика формы -->
+    <script src="/js/engine.js" type="text/javascript"></script>
+
+
+    </head>
+    <body>
+        
+    <div class="row">
+
+            <div class="col-5">
+            <form class="form-group" id="form">
+        
+                <h3><span class="badge">Определение координат по названию города:</span></h3>       
+                <div for="CityName" class="form-group">
+                    <label class="control-label">Город</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="CityName" name="CityName"/>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">    
+                        <button type="button" class="btn btn-secondary" id="find">Поиск</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="longitude" class="control-label">Долгота</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="longitude" name="longitude"/> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="latitude" class="control-label">Широта</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="latitude" name="latitude" /> 
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="button" class="btn btn-primary">Записать координаты</button>
+                </div>
+              </div> 
+        
+        </form>
+        </div>
+    
+        <div class="col-5">
+            <h3><span class="badge">Определение расстояния между городами:</span></h3>
+            <div class="form-group">
+                <label for="sel1">Выберите город #1:</label>
+                <select class="form-control" id="sel1">
+                </select>
+             </div>
+            <div class="form-group">
+                <label for="sel2">Выберите город #2:</label>
+                <select class="form-control" id="sel2">                    
+                </select>
+            </div>            
+            
+            <div class="table-responsive">          
+                <table class="table">
+                    <tr><td>Результат расчета:</td>
+                        <td id="result"></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="button" class="btn btn-info" onclick="GeoCalc()">Расчет расстояния</button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                
+                
+            </div>
+        </div>
+
+    </div>
+    </body>
+</html>
